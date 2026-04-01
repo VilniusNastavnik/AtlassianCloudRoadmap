@@ -1,0 +1,34 @@
+name: Build Roadmap RSS
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # ogni giorno alle 06:00
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate RSS feed
+        run: python generate.py
+
+      - name: Publish feed to docs/
+        run: |
+          mkdir -p docs
+          cp roadmap.xml docs/index.xml
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update Roadmap RSS"
