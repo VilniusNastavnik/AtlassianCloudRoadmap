@@ -2,7 +2,7 @@ import requests
 from feedgen.feed import FeedGenerator
 
 # Endpoint JSON reale della Atlassian Cloud Roadmap (Next.js)
-URL = "https://www.atlassian.com/_next/data/RANDOM_PLACEHOLDER/roadmap/cloud.json"
+URL = "https://www.atlassian.com/roadmap/cloud?category=agileDevOps;analytics;ai;itsm;platform;workManagement&selectedProduct=confluence;jsw;jiraService"
 
 # Recupero del JSON
 resp = requests.get(URL)
